@@ -41,6 +41,7 @@ int numSensors=0;
 bool receivedConfig = false;
 bool metric = true;
 int batteryPcnt = 56;
+char str_rssi[11];
 
 // Initialize temperature message
 MyMessage msg(0,V_TEMP);
@@ -108,9 +109,9 @@ void loop()
   //sendin RSSI for MyController
   // send(msgRxRSSI.set(transportGetSignalReport(SR_RX_RSSI)));
   int rssi=transportGetSignalReport(SR_RX_RSSI);
-  char str[11];
-sprintf (str, "rssi:%d dBm", rssi);
-  msgRxRSSI.set(str);
+
+  sprintf (str_rssi, "rssi:%d dBm", rssi);
+  msgRxRSSI.set(str_rssi);
   send(msgRxRSSI);
   sleep(SLEEP_TIME);
 }
